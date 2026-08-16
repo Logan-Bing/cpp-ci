@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  memcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer valgrind
+        run: sudo apt-get update && sudo apt-get install -y valgrind
+
+      - name: Compiler
+        run: g++ -Wall -Wextra -Werror -g -o test main.cpp
+
+      - name: Vérifier les leaks
+        run: valgrind --leak-check=full --error-exitcode=42 ./test
