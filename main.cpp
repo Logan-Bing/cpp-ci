@@ -6,6 +6,5 @@ int main()
 
 	(void)ptr;
 
-	delete ptr;
 	return 0;
 }
